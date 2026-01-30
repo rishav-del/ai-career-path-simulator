@@ -23,7 +23,7 @@ export async function registerRoutes(
 
       // AI Generation Logic
       const prompt = `
-        Act as a career counselor. Based on the following profile, generate 3 distinct career paths.
+        Act as a career counselor. Based on the following profile, generate 3 distinct career paths labeled as Plan A, Plan B, and Plan C.
         
         Profile:
         - Skills: ${input.skills}
@@ -34,16 +34,18 @@ export async function registerRoutes(
 
         Return a JSON object with a key "careerPaths" which is an array of 3 objects. 
         Each object must have:
+        - planLabel: string (e.g., "Plan A", "Plan B", "Plan C")
         - title: string
+        - whyItFits: string (Clear explanation of why this path fits the user's background and interests)
         - matchScore: number (0-100)
         - timeline: string (e.g., "6 months")
         - difficulty: "Easy" | "Medium" | "Hard"
         - description: string (brief overview)
         - requiredSkills: string[]
         - missingSkills: string[]
-        - actionPlan: string[] (30-day plan, simplified to key steps)
+        - actionPlan: string[] (A detailed 30-day action plan with specific weekly milestones)
         
-        Ensure the response is valid JSON.
+        Ensure the response is valid JSON and easy for a beginner to understand.
       `;
 
       const completion = await openai.chat.completions.create({
