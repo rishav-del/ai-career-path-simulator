@@ -54,7 +54,7 @@ export default function Home() {
             </p>
             
             <Link href="/simulator">
-              <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all hover:-translate-y-1">
+              <Button size="lg" className="h-14 px-8 text-lg rounded-full btn-gradient">
                 Start Career Simulation
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>

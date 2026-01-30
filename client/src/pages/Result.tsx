@@ -92,20 +92,20 @@ export default function Result() {
             <CareerPathCard key={index} path={path} index={index} />
           )) || (
             // Fallback if data structure is unexpected
-            <div className="col-span-3 text-center py-20">
+            <div className="col-span-3 text-center py-20 glass-card">
               <p className="text-muted-foreground">No paths generated. Please try again.</p>
             </div>
           )}
         </div>
 
-        <div className="mt-16 bg-primary/5 rounded-2xl p-8 border border-primary/10 text-center">
+        <div className="mt-16 glass-card p-8 text-center">
           <h3 className="text-xl font-bold mb-3">Not satisfied with these results?</h3>
           <p className="text-muted-foreground mb-6">
             You can tweak your profile inputs to get different recommendations. 
             Adding more specific details usually leads to better matches.
           </p>
           <Link href="/simulator">
-            <Button size="lg" variant="secondary">Run New Simulation</Button>
+            <Button size="lg" variant="secondary" className="hover-elevate">Run New Simulation</Button>
           </Link>
         </div>
       </main>

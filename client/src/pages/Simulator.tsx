@@ -81,10 +81,10 @@ export default function Simulator() {
           <p className="text-muted-foreground">Tell us about yourself so we can map your future.</p>
         </div>
 
-        <Card className="border-border/60 shadow-xl bg-card/80 backdrop-blur-sm overflow-hidden">
-          <div className="h-2 bg-secondary w-full">
+        <Card className="glass-card overflow-hidden">
+          <div className="h-2 bg-secondary/50 w-full">
             <motion.div 
-              className="h-full bg-primary"
+              className="h-full bg-gradient-to-r from-primary to-accent shadow-[0_0_10px_rgba(var(--primary),0.5)]"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}
@@ -108,14 +108,14 @@ export default function Simulator() {
                         name="background"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-lg font-semibold">Current Background</FormLabel>
-                            <FormDescription>
+                            <FormLabel className="text-lg font-bold">Current Background</FormLabel>
+                            <FormDescription className="text-muted-foreground/80">
                               What is your current role, education, or professional experience?
                             </FormDescription>
                             <FormControl>
                               <Textarea 
-                                placeholder="e.g. I have a degree in Marketing but have been working as a barista for 2 years. I'm good with people..." 
-                                className="min-h-[160px] resize-none text-base"
+                                placeholder="e.g. I have a degree in Marketing but have been working as a barista for 2 years..." 
+                                className="min-h-[160px] resize-none text-base bg-background/50 border-border/50 focus:border-primary/50 transition-colors"
                                 {...field} 
                               />
                             </FormControl>
@@ -139,12 +139,12 @@ export default function Simulator() {
                         name="skills"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-lg font-semibold">Your Skills</FormLabel>
-                            <FormDescription>List your technical and soft skills.</FormDescription>
+                            <FormLabel className="text-lg font-bold">Your Skills</FormLabel>
+                            <FormDescription className="text-muted-foreground/80">List your technical and soft skills.</FormDescription>
                             <FormControl>
                               <Textarea 
-                                placeholder="e.g. Python, Excel, Public Speaking, Project Management..." 
-                                className="min-h-[100px] resize-none text-base"
+                                placeholder="e.g. Python, Excel, Public Speaking..." 
+                                className="min-h-[100px] resize-none text-base bg-background/50 border-border/50 focus:border-primary/50 transition-colors"
                                 {...field} 
                               />
                             </FormControl>
@@ -157,12 +157,12 @@ export default function Simulator() {
                         name="interests"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-lg font-semibold">Interests & Passions</FormLabel>
-                            <FormDescription>What topics or activities excite you?</FormDescription>
+                            <FormLabel className="text-lg font-bold">Interests & Passions</FormLabel>
+                            <FormDescription className="text-muted-foreground/80">What topics or activities excite you?</FormDescription>
                             <FormControl>
                               <Textarea 
-                                placeholder="e.g. Technology, Design, Helping people, Sustainability..." 
-                                className="min-h-[100px] resize-none text-base"
+                                placeholder="e.g. Technology, Design, Helping people..." 
+                                className="min-h-[100px] resize-none text-base bg-background/50 border-border/50 focus:border-primary/50 transition-colors"
                                 {...field} 
                               />
                             </FormControl>
@@ -186,12 +186,12 @@ export default function Simulator() {
                         name="goals"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-lg font-semibold">Career Goals</FormLabel>
-                            <FormDescription>Where do you see yourself in 5 years? (Optional)</FormDescription>
+                            <FormLabel className="text-lg font-bold">Career Goals</FormLabel>
+                            <FormDescription className="text-muted-foreground/80">Where do you see yourself in 5 years? (Optional)</FormDescription>
                             <FormControl>
                               <Input 
                                 placeholder="e.g. Leading a team, Working remotely..." 
-                                className="text-base py-6"
+                                className="text-base py-6 bg-background/50 border-border/50 focus:border-primary/50 transition-colors"
                                 {...field} 
                                 value={field.value ?? ""}
                               />
@@ -205,12 +205,12 @@ export default function Simulator() {
                         name="availability"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-lg font-semibold">Weekly Availability</FormLabel>
-                            <FormDescription>How much time can you dedicate to learning per week?</FormDescription>
+                            <FormLabel className="text-lg font-bold">Weekly Availability</FormLabel>
+                            <FormDescription className="text-muted-foreground/80">How much time can you dedicate to learning per week?</FormDescription>
                             <FormControl>
                               <Input 
                                 placeholder="e.g. 10 hours/week, Weekends only..." 
-                                className="text-base py-6"
+                                className="text-base py-6 bg-background/50 border-border/50 focus:border-primary/50 transition-colors"
                                 {...field} 
                               />
                             </FormControl>
@@ -228,20 +228,20 @@ export default function Simulator() {
                     variant="ghost"
                     onClick={prevStep}
                     disabled={step === 0}
-                    className={step === 0 ? "invisible" : ""}
+                    className={step === 0 ? "invisible" : "hover:bg-primary/5"}
                   >
                     Back
                   </Button>
 
                   {step < steps.length - 1 ? (
-                    <Button type="button" onClick={nextStep} className="px-8">
+                    <Button type="button" onClick={nextStep} className="btn-gradient px-8">
                       Next Step <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   ) : (
                     <Button 
                       type="submit" 
                       disabled={createSimulation.isPending}
-                      className="px-8 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary"
+                      className="btn-gradient px-8"
                     >
                       {createSimulation.isPending ? (
                         <>
