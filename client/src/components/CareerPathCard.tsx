@@ -19,7 +19,9 @@ import { Card } from "@/components/ui/card";
 
 interface CareerPathProps {
   path: {
+    planLabel?: string;
     title: string;
+    whyItFits?: string;
     matchScore: number;
     timeline: string;
     difficulty: "Easy" | "Medium" | "Hard";
@@ -62,9 +64,16 @@ export function CareerPathCard({ path, index }: CareerPathProps) {
           
           <div className="relative z-10">
             <div className="flex justify-between items-start mb-4">
-              <Badge variant="secondary" className={`font-medium ${getDifficultyColor(path.difficulty)}`}>
-                {path.difficulty} Path
-              </Badge>
+              <div className="flex flex-col gap-2">
+                {path.planLabel && (
+                  <Badge variant="outline" className="w-fit border-primary/30 text-primary font-bold">
+                    {path.planLabel}
+                  </Badge>
+                )}
+                <Badge variant="secondary" className={`font-medium ${getDifficultyColor(path.difficulty)}`}>
+                  {path.difficulty} Path
+                </Badge>
+              </div>
               <div className="flex flex-col items-end">
                 <span className={`text-2xl font-bold font-display ${getScoreColor(path.matchScore)}`}>
                   {path.matchScore}%
@@ -74,6 +83,10 @@ export function CareerPathCard({ path, index }: CareerPathProps) {
             </div>
 
             <h3 className="text-xl font-bold mb-2 pr-8 leading-tight">{path.title}</h3>
+            
+            {path.whyItFits && (
+              <p className="text-sm text-muted-foreground italic mb-3">"{path.whyItFits}"</p>
+            )}
             
             <div className="flex items-center gap-2 text-sm text-muted-foreground mt-3">
               <Clock className="w-4 h-4" />

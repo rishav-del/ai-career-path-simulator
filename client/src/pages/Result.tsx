@@ -38,11 +38,14 @@ export default function Result() {
   }
 
   const resultData = simulation.result as {
-    paths: Array<{
+    careerPaths: Array<{
+      planLabel: string;
       title: string;
+      whyItFits: string;
       matchScore: number;
       timeline: string;
       difficulty: "Easy" | "Medium" | "Hard";
+      description: string;
       requiredSkills: string[];
       missingSkills: string[];
       actionPlan: string[];
@@ -85,10 +88,10 @@ export default function Result() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {resultData?.paths?.map((path, index) => (
+          {resultData?.careerPaths?.map((path, index) => (
             <CareerPathCard key={index} path={path} index={index} />
           )) || (
-            // Fallback if data structure is unexpected (though it should be typed)
+            // Fallback if data structure is unexpected
             <div className="col-span-3 text-center py-20">
               <p className="text-muted-foreground">No paths generated. Please try again.</p>
             </div>

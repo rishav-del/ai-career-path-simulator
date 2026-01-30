@@ -193,6 +193,7 @@ export default function Simulator() {
                                 placeholder="e.g. Leading a team, Working remotely..." 
                                 className="text-base py-6"
                                 {...field} 
+                                value={field.value ?? ""}
                               />
                             </FormControl>
                             <FormMessage />
