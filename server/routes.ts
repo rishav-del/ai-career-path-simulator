@@ -44,6 +44,7 @@ export async function registerRoutes(
         - requiredSkills: string[]
         - missingSkills: string[]
         - actionPlan: string[] (A detailed 30-day action plan with specific weekly milestones)
+        - extendedPlan: Array<{ week: string, focus: string, skills: string[], tasks: string[] }> (A detailed plan for Days 31-60, broken into 4 weekly segments)
         
         Ensure the response is valid JSON and easy for a beginner to understand.
       `;
