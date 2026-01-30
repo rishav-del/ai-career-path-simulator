@@ -1,38 +1,40 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { db } from "./db";
+import {
+  simulations,
+  type InsertSimulation,
+  type Simulation
+} from "@shared/schema";
+import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  createSimulation(simulation: InsertSimulation & { result: any }): Promise<Simulation>;
+  getSimulation(id: number): Promise<Simulation | undefined>;
+  getSimulations(): Promise<Simulation[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  async createSimulation(insertSimulation: InsertSimulation & { result: any }): Promise<Simulation> {
+    const [simulation] = await db
+      .insert(simulations)
+      .values(insertSimulation)
+      .returning();
+    return simulation;
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async getSimulation(id: number): Promise<Simulation | undefined> {
+    const [simulation] = await db
+      .select()
+      .from(simulations)
+      .where(eq(simulations.id, id));
+    return simulation;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async getSimulations(): Promise<Simulation[]> {
+    return await db
+      .select()
+      .from(simulations)
+      .orderBy(desc(simulations.createdAt));
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
